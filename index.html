@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberType Terminal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="matrix-bg min-h-screen flex items-center justify-center p-4">
+    <div class="bg-black/80 backdrop-blur-sm p-8 rounded-lg shadow-2xl border border-green-500/30 w-full max-w-3xl">
+        <div class="flex items-center mb-4 space-x-2">
+            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+        </div>
+        <div class="font-mono">
+            <div class="text-green-500 mb-2">> System initialization...</div>
+            <div class="text-cyan-400 mb-2" id="date"></div>
+            <div class="text-green-400" id="terminal"></div>
+            <div class="text-green-500 inline-block cursor">█</div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
