@@ -18,28 +18,110 @@
 
 .matrix-bg {
     background-color: rgba(0, 0, 0, 0.9);
-    background-image: radial-gradient(#0f0 1px, transparent 1px);
-    background-size: 50px 50px;
+    background-image: radial-gradient(rgba(0, 255, 0, 0.05) 1px, transparent 1px); /* Sutil efecto de puntos verdes */
+    background-size: 25px 25px; /* Ajuste de tamaño para la densidad */
+    overflow: hidden; /* Para evitar barras de scroll por animaciones que se salgan */
 }
 
-.bg-black\/80:hover {
-    box-shadow: 0 0 25px rgba(0, 255, 0, 0.2);
-    transition: box-shadow 0.3s ease;
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(0deg, transparent 0%, rgba(0,30,0,0.7) 1.5%, transparent 1.6%), /* Darker, more subtle lines */
+        repeating-linear-gradient(0deg,
+            transparent,
+            transparent calc(1.2em - 2px), /* Adjusted line height */
+            rgba(0,100,0,0.08) calc(1.2em - 1px), /* More subtle color */
+            rgba(0,120,0,0.1) 1.2em);
+    background-size: 100% 1.8em, 100% 1.8em; /* Control line height and density */
+    animation: matrix-scroll 0.5s linear infinite; /* Faster scroll */
+    z-index: -2; /* Behind everything, including the radial gradient if it's on body */
+    opacity: 0.25; /* Adjust for subtlety */
+}
+
+@keyframes matrix-scroll {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 -1.8em; } /* Scroll one line height */
+}
+
+.glow {
+    text-shadow: 0 0 4px #39FF14, 0 0 8px #39FF14, 0 0 12px #39FF14; /* Ajustado para un verde más brillante y sutil */
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 7px #39FF14, 0 0 10px #39FF14, 0 0 15px #39FF14;
+    }
+    50% {
+        opacity: 0.85;
+        text-shadow: 0 0 9px #39FF14, 0 0 13px #39FF14, 0 0 20px #39FF14;
+    }
+}
+.animate-pulse {
+    animation: pulse 2.2s infinite ease-in-out;
+}
+
+.animate-blink { /* Ya estaba, se mantiene */
+    animation: cursor-blink 1s infinite steps(1, start);
+}
+
+@keyframes ping-slow {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.6;
+         box-shadow: 0 0 2px rgba(127, 255, 0, 0.3); /* Chartreuse glow */
+    }
+    50% {
+        transform: scale(1.25);
+        opacity: 0.9;
+        box-shadow: 0 0 6px rgba(127, 255, 0, 0.5);
+    }
+}
+.animate-ping-slow {
+    animation: ping-slow 2.8s infinite cubic-bezier(0, 0, 0.2, 1);
+}
+.animation-delay-200 { animation-delay: 0.25s; }
+.animation-delay-400 { animation-delay: 0.5s; }
+
+.bg-black\/85:hover { /* La clase en el HTML es bg-black/85 */
+    box-shadow: 0 0 25px rgba(57, 255, 20, 0.35), 0 0 12px rgba(57, 255, 20, 0.25) inset;
+    border-color: rgba(57, 255, 20, 0.75);
+    transform: translateY(-1px) scale(1.005); /* Sutil elevación y escala */
+    transition: box-shadow 0.3s ease-out, border-color 0.3s ease-out, transform 0.3s ease-out;
+}
+
+/* Estilo de selección de texto general */
+::selection {
+    background: #39FF14; /* Verde neón */
+    color: #0a0a0a; /* Negro oscuro para contraste */
+    text-shadow: none;
+}
+::-moz-selection { /* Firefox */
+    background: #39FF14;
+    color: #0a0a0a;
+    text-shadow: none;
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 10px; /* Ligeramente más ancha */
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(10, 20, 10, 0.5); /* Fondo de track más oscuro y temático */
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #0f0;
-    border-radius: 4px;
+    background: #22c55e; /* Verde más oscuro de Tailwind (green-500) */
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.5);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #00ff00;
+    background: #39FF14; /* Verde neón al pasar el mouse */
+    box-shadow: 0 0 5px #39FF14;
 }
